@@ -1,12 +1,27 @@
 import express from "express";
 // import { MongoClient, ServerApiVersion } from 'mongodb';
 import mongoose from "mongoose";
-import { Book } from './models/bookModel';
+import { Book } from "../backend/models/bookModel.js"
+// const cors = require('cors');
+import cors from "cors";
+import { ObjectId } from "mongodb";
 
 
 const PORT = process.env.port || 5000;
 
 const app = express();
+
+//middleware
+app.use(express.json());
+// app.use(cors());
+
+app.use(
+  cors({
+    origin: 'http://localhost:5000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+  })
+);
 
 app.get('/', (req, res) => {
   // console.log(req);
@@ -42,10 +57,42 @@ app.post('/books', async (req, res) => {
   }
 })
 
+//Route for getting all Books
+app.get('/books', async (req, res) => {
+  try {
+    const books = await Book.find({});
+    return res.status(200).json({
+      count: books.length,
+      data: books
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+})
+
+//route for getting one book from database by id
+app.get('/books/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).send({ message: 'Invalid book ID' })
+    }
+    //********************** */
+    //here was a fckn error which caused me much trouble. don't use {} inside findById.......*************************************
+    const book = await Book.findById(id);
+    return res.status(200).json(book);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+})
+
+
 mongoose
   .connect(mongoDBURL)
   .then(() => {
-    console.log('App connectd to database');
+    console.log('App connected to database');
     app.listen(PORT, () => {
       console.log(`App is listening to port: ${PORT}`);
     });
