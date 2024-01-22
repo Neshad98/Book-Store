@@ -1,6 +1,7 @@
 import express from "express";
 // import { MongoClient, ServerApiVersion } from 'mongodb';
 import mongoose from "mongoose";
+// import { Book } from "../backend/models/bookModel.js"
 import booksRoute from "./routes/booksRoute.js"
 // const cors = require('cors');
 import cors from "cors";
@@ -28,7 +29,9 @@ app.get('/', (req, res) => {
   return res.status(234).send("Welcome to the Backend of Book store")
 });
 
-app.use('/books', booksRoute);
+app.use('/books', booksRoute)
+
+///////
 
 
 const mongoDBURL = "mongodb+srv://book-store:XB4jnFnWQrpO1gbe@cluster0.hidmqma.mongodb.net/?retryWrites=true&w=majority";
