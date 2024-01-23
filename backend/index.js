@@ -1,9 +1,8 @@
+import mongoose from "mongoose";
 import express from "express";
 // import { MongoClient, ServerApiVersion } from 'mongodb';
-import mongoose from "mongoose";
 // import { Book } from "../backend/models/bookModel.js"
 import booksRoute from "./routes/booksRoute.js"
-// const cors = require('cors');
 import cors from "cors";
 
 
@@ -11,6 +10,11 @@ import cors from "cors";
 const PORT = process.env.port || 5000;
 
 const app = express();
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Internal Server Error');
+});
 
 //middleware
 app.use(express.json());
@@ -41,7 +45,7 @@ console.log(mongoDBURL);
 
 
 mongoose
-  .connect(mongoDBURL)
+  .connect(mongoDBURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('App connected to database');
     app.listen(PORT, () => {
