@@ -19,10 +19,25 @@ const CreateBook = () => {
     };
     setLoading(true);
     axios.post('http://localhost:5000/books', data)
+      .then(() => {
+        setLoading(false);
+        navigate('/')
+      })
+      .catch((error) => {
+        setLoading(false);
+        alert("An error happened. Please check console.");
+        console.log(error);
+      })
   }
 
   return (
-    <div>CreateBook</div>
+    <div className="p-4">
+      <BackButton />
+      <h1 className="text-3xl my-4"></h1>
+      {loading ? <Spinner /> : ''}
+
+
+    </div>
   )
 }
 
