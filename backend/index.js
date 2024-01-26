@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+// var mongoose = require('mongoose');
 import express from "express";
 // import { MongoClient, ServerApiVersion } from 'mongodb';
 // import { Book } from "../backend/models/bookModel.js"
@@ -11,10 +12,10 @@ const PORT = process.env.port || 5000;
 
 const app = express();
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Internal Server Error');
-});
+// app.use((err, req, res, next) => {
+//   console.error(err.stack);
+//   res.status(500).send('Internal Server Error');
+// });
 
 //middleware
 app.use(express.json());
@@ -45,7 +46,7 @@ console.log(mongoDBURL);
 
 
 mongoose
-  .connect(mongoDBURL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongoDBURL)
   .then(() => {
     console.log('App connected to database');
     app.listen(PORT, () => {

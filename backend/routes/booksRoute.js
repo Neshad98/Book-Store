@@ -1,4 +1,6 @@
 import express from 'express';
+/// i have fckne mongoose error just because i didn't import mongoose.. This error costed me 2 fckn dayssss. always remember it to import mongoose inside routes
+import mongoose from 'mongoose';
 const router = express.Router();
 //always include .js when importing
 import { Book } from '../models/bookModel.js';

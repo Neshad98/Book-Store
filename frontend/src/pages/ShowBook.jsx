@@ -11,8 +11,7 @@ const ShowBook = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`http://localhost:5000/books/${id}`)
+    axios.get(`http://localhost:5000/books/${id}`)
       .then((res) => {
         setBook(res.data);
         setLoading(false);
@@ -21,7 +20,7 @@ const ShowBook = () => {
         console.log(error);
         setLoading(false);
       })
-  }, [id])
+  }, [id, setLoading])
 
   return (
     <div className="p-4">
