@@ -10,7 +10,8 @@ const DeleteBook = () => {
   const { id } = useParams();
   const handleDeleteBook = () => {
     setLoading(true);
-    axios.delete(`http://localhost:5000/books/${id}`)
+    axios
+      .delete(`http://localhost:5000/books/${id}`)
       .then(() => {
         setLoading(false);
         navigate('/');
