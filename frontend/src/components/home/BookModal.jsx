@@ -10,6 +10,22 @@ const BookModal = ({ book, onClose }) => {
         className='w-[600px] max-w-full h-[400px] bg-white rounded-xl p-4 flex flex-col relative'
       >
         <AiOutlineClose className='absolute right-6 top-6 text-3xl text-red-600 cursor-pointer' onClick={onClose} />
+        <h2 className='w-fit px-4 py-1 bg-red-300 rounded-lg'>
+          {book.publishYear}
+        </h2>
+        <h4 className="my-2 text-gray-500">{book._id}</h4>
+        <div className="flex justify-start items-center gap-x-2">
+          <PiBookOpenTextLight className='text-red-300 text-2xl' />
+          <h2 className="my-1">{book.title}</h2>
+        </div>
+        <div className="flex justify-start itemst-center gap-x-2">
+          <BiUserCircle className='text-red-300 text-2xl' />
+          <h2 className="my-1">{book.author}</h2>
+        </div>
+        <p className='mt-4'>Anything you want to show</p>
+        <p className='my-2'>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolorem qui temporibus eveniet nam, perspiciatis ab dignissimos distinctio ullam quos iure blanditiis unde delectus laboriosam esse, laborum harum beatae tempora. Placeat quis, quod nemo accusamus alias aliquam officiis quas fugiat soluta ab doloribus quaerat vero consequuntur praesentium eos molestiae unde!
+        </p>
       </div>
     </div>
   )
